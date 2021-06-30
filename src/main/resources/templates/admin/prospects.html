@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+	
+</script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script type="text/javascript"
+	src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
+
+<script
+	src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{/Buttons-1.7.0/css/buttons.dataTables.css}" />
+
+<script
+	src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+<link href="../../css/header.css" rel="stylesheet"
+	th:href="@{/css/header.css}">
+<link href="../../css/main.css" rel="stylesheet"
+	th:href="@{/css/main.css}">
+<link href="../../css/prospects.css" rel="stylesheet"
+	th:href="@{/css/prospects.css}">
+<link href="/fontawesome/css/all.css" rel="stylesheet">
+<title>Listes des prospects</title>
+</head>
+
+
+<script src="bstable.js"></script>
+
+
+<body>
+	<div th:replace="/fragment/header :: header"></div>
+	<div class="container-fluid d-flex flex-column justify-content-center">
+
+		<div class="d-flex flex-row justify-content-center w-100">
+			<div
+				class="card titre shadow-lg bg-dark text-white w-50 text-center p-2">
+				<h1>Liste des prospects</h1>
+			</div>
+		</div>
+		<div class="d-flex flex-row justify-content-center w-100 text-center my-4 bloc">
+			<div class="col-3">
+				<div class="card">bloc1</div>
+			</div>
+			<div class="col-3">
+				<div class="card">bloc2</div>
+			</div>
+			<div class="col-3">
+				<div class="card">bloc3</div>
+			</div>
+		</div>
+		<div class="d-flex flex-row justify-content-center w-100 mainTableau">
+			<table class="table table-dark table-bordered mt-4" id="datatable">
+				<thead>
+					<tr class="text-center">
+						<th scope="col">Civilité</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Prenom</th>
+						<th scope="col">Mail</th>
+						<th scope="col">Télèphone</th>
+						<th scope="col">Situation famille</th>
+						<th scope="col">Personne à charge</th>
+						<th scope="col">Lieu habitation</th>
+						<th scope="col">A contacter</th>
+						<th scope="col">Promotion</th>
+						<th scope="col">Condition</th>
+						<th scope="col">Ville</th>
+						<th scope="col">Code</th>
+						<th scope="col">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="prospect : ${listePropsect}"
+						class="bg-light text-dark font-weight-bold text-center">
+						<td th:text="${prospect.prosCivilite}"></td>
+						<td th:text="${prospect.prosNom}"></td>
+						<td th:text="${prospect.prosPrenom}"></td>
+						<td th:text="${prospect.prosMail}"></td>
+						<td th:text="${prospect.prosPhone}"></td>
+						<td th:text="${prospect.prosSitFamilial}"></td>
+						<td th:text="${prospect.prosPersCharge}"></td>
+						<td th:text="${prospect.prosLieuHab}"></td>
+						<td th:if="${prospect.prosContact == true}">Oui</td>
+						<td th:if="${prospect.prosContact != true}">Non</td>
+						<td th:if="${prospect.prosPromo == true}">Oui</td>
+						<td th:if="${prospect.prosPromo != true}">Non</td>
+						<td th:if="${prospect.prosCondition == true}">Oui</td>
+						<td th:if="${prospect.prosCondition != true}">Non</td>
+						<td th:text="${prospect.prosVille}"></td>
+						<td th:text="${prospect.prosCode}"></td>
+						<td class="d-flex flex-row justify-content-between p-3 m-0"><i class="fas fa-edit text-warning"></i><i
+							class="far fa-arrow-alt-circle-right text-success"></i><i
+							class="fas fa-trash-alt text-danger"></i></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script>
+		/*<![CDATA[*/
+		$(document).ready(function() {
+			$('#datatable').DataTable({});
+
+		});
+		/*]]>*/
+	</script>
+</body>
+
+</html>
