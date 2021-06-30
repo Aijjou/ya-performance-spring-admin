@@ -18,6 +18,10 @@ public class ProspectAppelDirectController {
 	@RequestMapping(value = "/admin/liste-prospect-appel", method = RequestMethod.GET)
 	String getAllProspectAppel(Model model) {
 
+		
+		
+		
+		
 		model.addAttribute("liste", prospectAppelDirectService.findAll());
 
 		return "/admin/liste-prospect-appel";

@@ -9,44 +9,42 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
 	integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 	crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-	integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-	crossorigin="anonymous"></script>
+
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 	crossorigin="anonymous"></script>
-<script type="text/javascript"
-	src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
-	
-</script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
-<script type="text/javascript"
-	src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
 
-<script
-	src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.js"></script>
+
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
 <script type="text/javascript" charset="utf8"
-	src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+	src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 
-<link rel="stylesheet" type="text/css"
-	th:href="@{/Buttons-1.7.0/css/buttons.dataTables.css}" />
-
+<script type="text/javascript" charset="utf8"
+	src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script
-	src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+	src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
 <link href="../../css/header.css" rel="stylesheet"
 	th:href="@{/css/header.css}">
 <link href="../../css/main.css" rel="stylesheet"
 	th:href="@{/css/main.css}">
-<link href="../../css/prospects.css" rel="stylesheet"
-	th:href="@{/css/prospects.css}">
 <link href="/fontawesome/css/all.css" rel="stylesheet">
 <title>Listes des prospects</title>
 </head>
@@ -76,10 +74,10 @@
 				<div class="card">bloc3</div>
 			</div>
 		</div>
-		<div class="d-flex flex-row justify-content-center w-100 mainTableau">
+		<div class="d-flex flex-row justify-content-center w-100 mainTableau p-4">
 			<table class="table table-dark table-bordered mt-4" id="datatable">
 				<thead>
-					<tr class="text-center">
+					<tr class="text-center align-self-center">
 						<th scope="col">Civilité</th>
 						<th scope="col">Nom</th>
 						<th scope="col">Prenom</th>
@@ -98,8 +96,8 @@
 				</thead>
 				<tbody>
 					<tr th:each="prospect : ${listePropsect}"
-						class="bg-light text-dark font-weight-bold text-center">
-						<td th:text="${prospect.prosCivilite}"></td>
+						class="bg-light text-dark font-weight-bold text-center align-self-center pt-2">
+						<td  th:text="${prospect.prosCivilite}"></td>
 						<td th:text="${prospect.prosNom}"></td>
 						<td th:text="${prospect.prosPrenom}"></td>
 						<td th:text="${prospect.prosMail}"></td>
@@ -127,7 +125,12 @@
 	<script>
 		/*<![CDATA[*/
 		$(document).ready(function() {
-			$('#datatable').DataTable({});
+			$('#datatable').DataTable({
+
+				dom : 'Bfrtip',
+				buttons : [ 'copy', 'csv', 'excel', 'pdf', 'print' ]
+
+			});
 
 		});
 		/*]]>*/
