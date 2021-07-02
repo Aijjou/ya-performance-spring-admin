@@ -36,4 +36,10 @@ public class ProspectAppelDirectServiceImpl implements ProspectAppelDirectServic
 
 	}
 
+	@Override
+	public ProspectAppelDirect finProspectAppelDirectById(Integer id) {
+
+		return prospectAppelDirectRepository.findById(id).get();
+	}
+
 }

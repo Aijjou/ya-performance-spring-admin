@@ -11,6 +11,7 @@ public interface ProspectAppelDirectService {
 	public ProspectAppelDirect create(ProspectAppelDirect prospectAppelDirect);
 	public List<ProspectAppelDirect> findAll();
 	public void deleteByid(Integer idProspectAppelDirect);
+	public ProspectAppelDirect finProspectAppelDirectById(Integer id);
 
 
 }

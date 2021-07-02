@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "prospect_appel_direct", catalog = "yaperf")
@@ -147,7 +149,7 @@ public class ProspectAppelDirect {
 	public void setIsPasInteresse(Boolean isPasInteresse) {
 		this.isPasInteresse = isPasInteresse;
 	}
-
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date_demande")
 	public Date getDemandeDate() {
 		return demandeDate;
@@ -168,10 +170,12 @@ public class ProspectAppelDirect {
 
 	@Override
 	public String toString() {
-		return "ProspectAppelDirect [id=" + id + ", nom=" + nom + ", telephone=" + telephone + ", isChaudiere="
-				+ isChaudiere + ", isSolaire=" + isSolaire + ", isDivers=" + isDivers + ", isIsolation=" + isIsolation
-				+ ", isAppel=" + isAppel + ", isMessagerie=" + isMessagerie + ", isRdv=" + isRdv + ", isPasInteresse="
-				+ isPasInteresse + "]";
+		return "ProspectAppelDirect [id=" + id + ", civilite=" + civilite + ", nom=" + nom + ", telephone=" + telephone
+				+ ", isChaudiere=" + isChaudiere + ", isSolaire=" + isSolaire + ", isDivers=" + isDivers
+				+ ", isIsolation=" + isIsolation + ", isAppel=" + isAppel + ", isMessagerie=" + isMessagerie
+				+ ", isRdv=" + isRdv + ", isPasInteresse=" + isPasInteresse + ", demandeDate=" + demandeDate + "]";
 	}
+
+	
 
 }

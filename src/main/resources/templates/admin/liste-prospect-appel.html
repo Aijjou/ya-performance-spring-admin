@@ -57,7 +57,7 @@
 	<div th:replace="/fragment/header :: header"></div>
 	<div class="container-fluid d-flex flex-column justify-content-center">
 
-		<div class="d-flex flex-row justify-content-center w-100">
+		<div class="d-flex flex-row justify-content-center w-100 shadow-lg">
 			<div
 				class="card titre shadow-lg bg-dark text-white w-50 text-center p-2">
 				<h1>Liste des prospects directs</h1>
@@ -66,36 +66,66 @@
 		<div
 			class="d-flex flex-row justify-content-center w-100 text-center my-4 bloc">
 			<div class="col-2">
-				<div class="card">
+				<div class="card shadow-lg">
 					<div
-						class="card-header border-0 d-flex flex-row justify-content-start">TX
-						APPEL</div>
-					<div class="card-body border-0"></div>
-					<div class="card-footer border-0"></div>
+						class="card-header border-0 d-flex flex-row justify-content-between text-white font-weight-bold py-1 bg-dark">
+						<span>TX APPEL</span><span><i class="fas fa-mobile-alt"></i></span>
+					</div>
+					<div class="card-body border-0 taux font-weight-bold display-4 p-1"
+						th:classappend="${#numbers.formatInteger(txAppel,2,'POINT')&gt;'33'} and ${#numbers.formatInteger(txAppel,2,'POINT')&lt;'66'} ? 'text-warning' : (${#numbers.formatInteger(txAppel,2,'POINT')&gt;'66'}?'text-success':'text-danger')">
+						<span th:text="${#numbers.formatInteger(txAppel,2,'POINT')}"></span><span>%</span>
+					</div>
+					<div
+						class="card-footer border-0 d-flex flex-row justify-content-between py-1">
+						<i><span><small>NBRE <span
+									th:text="${nbreAppelInteger}"></span></small></span></i><i><span><small>TOTAL
+									<span th:text="${totalInteger}"></span>
+							</small></span></i>
+					</div>
 				</div>
 			</div>
 			<div class="col-2">
-				<div class="card">
+				<div class="card shadow-lg">
 					<div
-						class="card-header border-0 d-flex flex-row justify-content-start">TX
-						RDV</div>
-					<div class="card-body border-0"></div>
-					<div class="card-footer border-0"></div>
+						class="card-header border-0 d-flex flex-row justify-content-between text-white font-weight-bold py-1 bg-dark">
+						<span>TX RDV</span><span><i class="fas fa-user-friends"></i></span>
+					</div>
+					<div class="card-body border-0 taux font-weight-bold display-4 p-1"
+						th:classappend="${#numbers.formatInteger(txRdv,2,'POINT')&gt;'33'} and ${#numbers.formatInteger(txRdv,2,'POINT')&lt;'66'} ? 'text-warning' : (${#numbers.formatInteger(txRdv,2,'POINT')&gt;'66'}?'text-success':'text-danger')">
+						<span th:text="${#numbers.formatInteger(txRdv,2,'POINT')}"></span><span>%</span>
+					</div>
+					<div
+						class="card-footer border-0 d-flex flex-row justify-content-between py-1">
+						<i><span><small>NBRE <span
+									th:text="${nbreRdvInteger}"></span></small></span></i><i><span><small>TOTAL
+									<span th:text="${totalInteger}"></span>
+							</small></span></i>
+					</div>
 				</div>
 			</div>
 			<div class="col-2">
-				<div class="card">
+				<div class="card shadow-lg">
 					<div
-						class="card-header border-0 d-flex flex-row justify-content-start">TX
-						TRANSFORMATION</div>
-					<div class="card-body border-0"></div>
-					<div class="card-footer border-0"></div>
+						class="card-header border-0 d-flex flex-row justify-content-between text-white font-weight-bold py-1 bg-dark">
+						<span>TX TRANSFORMATION</span><span><i class="fas fa-handshake"></i></span>
+					</div>
+					<div class="card-body border-0 taux font-weight-bold display-4 p-1"
+						th:classappend="${#numbers.formatInteger(txTransfo,2,'POINT')&gt;'33'} and ${#numbers.formatInteger(txTransfo,2,'POINT')&lt;'66'} ? 'text-warning' : (${#numbers.formatInteger(txTransfo,2,'POINT')&gt;'66'}?'text-success':'text-danger')">
+						<span th:text="${#numbers.formatInteger(txTransfo,2,'POINT')}"></span><span>%</span>
+					</div>
+					<div
+						class="card-footer border-0 d-flex flex-row justify-content-between py-1">
+						<i><span><small>NBRE <span
+									th:text="${nbreTransfInteger}"></span></small></span></i><i><span><small>TOTAL
+									<span th:text="${totalInteger}"></span>
+							</small></span></i>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="d-flex flex-row justify-content-center w-100 mainTableau">
 
-			<table class="table table-dark table-bordered mt-4 text-center"
+			<table class="table table-dark mt-4 text-center shadow-lg"
 				id="datatable">
 				<thead>
 					<tr class="text-center align-self-center">
@@ -116,49 +146,168 @@
 				</thead>
 				<tbody>
 					<tr th:each="prospect : ${liste}"
-						class="bg-light text-dark font-weight-bold text-center">
+						class="bg-light text-dark font-weight-bold text-center pt-4">
 						<td
-							th:text="${#dates.format(prospect.demandeDate, 'dd-MMM-yyyy')}"></td>
-						<td th:text="${prospect.civilite}"></td>
-						<td th:text="${prospect.nom}"></td>
-						<td th:text="${prospect.telephone}"></td>
-						<td th:if="${prospect.isChaudiere == true}"><div
+							th:text="${#dates.format(prospect.demandeDate, 'dd-MM-yyyy HH:mm')}"
+							class="pt-3"></td>
+						<td th:text="${prospect.civilite}" class="pt-3"></td>
+						<td th:text="${prospect.nom}" class="pt-3"></td>
+						<td th:text="${prospect.telephone}" class="pt-3"></td>
+						<td th:if="${prospect.isChaudiere == true}" class="pt-3"><div
 								class="alert alert-success p-0 px-0 my-0">Oui</div></td>
-						<td th:if="${prospect.isChaudiere != true}"><div
+						<td th:if="${prospect.isChaudiere != true}" class="pt-3"><div
 								class="alert alert-danger p-0 px-0 my-0">Non</div></td>
-						<td th:if="${prospect.isSolaire == true}" class="text-success"><div
+						<td th:if="${prospect.isSolaire == true}"
+							class="text-success pt-3"><div
 								class="alert alert-success p-0 px-0 my-0">Oui</div></td>
-						<td th:if="${prospect.isSolaire != true}" class="text-danger"><div
+						<td th:if="${prospect.isSolaire != true}" class="text-danger pt-3"><div
 								class="alert alert-danger p-0 px-0 my-0">Non</div></td>
-						<td th:if="${prospect.isIsolation == true}" class="text-success"><div
+						<td th:if="${prospect.isIsolation == true}"
+							class="text-success pt-3"><div
 								class="alert alert-success p-0 px-0 my-0">Oui</div></td>
-						<td th:if="${prospect.isIsolation != true}" class="text-danger"><div
+						<td th:if="${prospect.isIsolation != true}"
+							class="text-danger pt-3"><div
 								class="alert alert-danger p-0 px-0 my-0">Non</div></td>
-						<td th:if="${prospect.isDivers == true}" class="text-success"><div
+						<td th:if="${prospect.isDivers == true}" class="text-success pt-3"><div
 								class="alert alert-success p-0 px-0 my-0">Oui</div></td>
-						<td th:if="${prospect.isDivers != true}" class="text-danger"><div
+						<td th:if="${prospect.isDivers != true}" class="text-danger pt-3"><div
 								class="alert alert-danger p-0 px-0 my-0">Non</div></td>
-						<td th:if="${prospect.isAppel == true}" class="text-success"><div
+						<td th:if="${prospect.isAppel == true}" class="text-success pt-3"><div
 								class="alert alert-success p-0 px-0 my-0">Oui</div></td>
-						<td th:if="${prospect.isAppel != true}" class="text-danger"><div
+						<td th:if="${prospect.isAppel != true}" class="text-danger pt-3"><div
 								class="alert alert-danger p-0 px-0 my-0">Non</div></td>
-						<td th:if="${prospect.isMessagerie == true}" class="text-success"><div
+						<td th:if="${prospect.isMessagerie == true}"
+							class="text-success pt-3"><div
 								class="alert alert-success p-0 px-0 my-0">Oui</div></td>
-						<td th:if="${prospect.isMessagerie != true}" class="text-danger"><div
+						<td th:if="${prospect.isMessagerie != true}"
+							class="text-danger pt-3"><div
 								class="alert alert-danger p-0 px-0 my-0">Non</div></td>
-						<td th:if="${prospect.isRdv == true}" class="text-success"><div
+						<td th:if="${prospect.isRdv == true}" class="text-success pt-3"><div
 								class="alert alert-success p-0 px-0 my-0">Oui</div></td>
-						<td th:if="${prospect.isRdv != true}" class="text-danger"><div
+						<td th:if="${prospect.isRdv != true}" class="text-danger pt-3"><div
 								class="alert alert-danger p-0 px-0 my-0">Non</div></td>
 						<td th:if="${prospect.isPasInteresse == true}"
-							class="text-success"><div
+							class="text-success pt-3"><div
 								class="alert alert-success p-0 px-0 my-0">Oui</div></td>
-						<td th:if="${prospect.isPasInteresse != true}" class="text-danger"><div
+						<td th:if="${prospect.isPasInteresse != true}"
+							class="text-danger pt-3"><div
 								class="alert alert-danger p-0 px-0 my-0">Non</div></td>
 						<td class="d-flex flex-row justify-content-between p-3 m-0"><a
-							href="#"><i class="fas fa-edit text-warning"></i></a><a href="#"><i
+							data-toggle="modal" data-target="#modal-warning"
+							th:attr="data-target='#modal-warning'+${prospect.id }"><i
+								class="fas fa-edit text-warning"></i></a><a href="#"><i
 								class="far fa-arrow-alt-circle-right text-success"></i></a><a
-							href="#"><i class="fas fa-trash-alt text-danger"></i></a></td>
+							href="#"><i class="fas fa-trash-alt text-danger"></i></a>
+							<div class="modal modal-warning fade in"
+								th:id="modal-warning+${prospect.id }">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<form action="/admin/edit-prospect-direct" method="POST"
+											th:object="${prospect}">
+											<div
+												class="modal-header bg-warning d-flex flex-row justify-content-center">
+												<span>Modification prospect : </span>&nbsp; <span
+													class="modal-title" th:text="${prospect.nom}"></span>
+											</div>
+											<div class="modal-body">
+												<div class="form-group">
+													<input th:value=${prospect.id} type="hidden"
+														class="text-dark" name="id"> <input
+														th:value=${prospect.isChaudiere} type="hidden"
+														class="text-dark" name="isChaudiere"> <input
+														th:value=${prospect.isSolaire} type="hidden"
+														class="text-dark" name="isSolaire"> <input
+														th:value=${prospect.isDivers} type="hidden"
+														class="text-dark" name="isDivers"> <input
+														th:value=${prospect.isIsolation} type="hidden"
+														class="text-dark" name="isIsolation"> <input
+														th:value=${prospect.demandeDate} type="hidden"
+														class="text-dark" name="demandeDate">
+												</div>
+
+												<div class="form-group">
+													<label for="exampleFormControlSelect1">Civilite</label> <select
+														class="form-control" th:field="*{civilite}"
+														name="civilite" id="exampleFormControlSelect1">
+														<option
+															th:text="${prospect.civilite=='Madame'}?'Madame':'Monsieur'"
+															th:value="'Madame'">
+														<option
+															th:text="!${prospect.civilite=='Madame'}?'Madame':'Monsieur'"
+															th:value="'Monsieur'">
+													</select>
+												</div>
+												<div class="form-group">
+													<label>Nom</label> <input type="text"
+														class="form-control font-weight-bold text-dark" id="nom"
+														name="nom" th:value="${prospect.nom}"
+														placeholder="ex : Martin" required>
+
+												</div>
+												<div class="form-group">
+													<label for="exampleInputPassword1">Telephone</label> <input
+														th:value="${prospect.telephone}" type="tel"
+														name="telephone" class="form-control"
+														id="exampleInputPassword1" placeholder="ex : 0621458878"
+														required></input>
+												</div>
+												<div class="form-group">
+													<label for="exampleFormControlSelect1">Appel</label> <select
+														class="form-control" id="exampleFormControlSelect1"
+														name="isAppel" th:field="*{isAppel}">
+														<option th:text="${prospect.isAppel}?Oui:Non"
+															th:value="${prospect.isAppel}">
+														<option th:text="!${prospect.isAppel}?Oui:Non"
+															th:value="!${prospect.isAppel}">
+													</select>
+												</div>
+												<div class="form-group">
+													<label for="exampleFormControlSelect1">Messagerie</label> <select
+														class="form-control" id="exampleFormControlSelect1"
+														name="isMessagerie">
+														<option th:text="${prospect.isMessagerie}?Oui:Non"
+															th:value="${prospect.isMessagerie}">
+														<option th:text="!${prospect.isMessagerie}?Oui:Non"
+															th:value="!${prospect.isMessagerie}">
+													</select>
+												</div>
+												<div class="form-group">
+													<label for="exampleFormControlSelect1">RDV</label> <select
+														class="form-control" id="exampleFormControlSelect1"
+														name="isRdv">
+														<option th:text="${prospect.isRdv}?Oui:Non"
+															th:value="${prospect.isRdv}">
+														<option th:text="!${prospect.isRdv}?Oui:Non"
+															th:value="!${prospect.isRdv}">
+													</select>
+												</div>
+												<div class="form-group">
+													<label for="exampleFormControlSelect1">Transformation</label>
+													<select class="form-control" id="exampleFormControlSelect1"
+														name="isPasInteresse">
+														<option th:text="${prospect.isPasInteresse}?Oui:Non"
+															th:value="${prospect.isPasInteresse}">
+														<option th:text="!${prospect.isPasInteresse}?Oui:Non"
+															th:value="!${prospect.isPasInteresse}">
+													</select>
+												</div>
+
+
+
+
+											</div>
+											<div class="modal-footer">
+												<button type="button"
+													class="btn btn-outline-danger pull-left"
+													data-dismiss="modal">Annuler</button>
+												<button type="submit" class="btn btn-outline-success">
+													<i class="fa fa-check"></i>&nbsp;Validation
+												</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div></td>
 					</tr>
 				</tbody>
 			</table>
