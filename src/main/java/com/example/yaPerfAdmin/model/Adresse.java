@@ -18,7 +18,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "Adresse", catalog = "yaperf")
+@Table(name = "Adresse", catalog = "bdd")
 public class Adresse implements java.io.Serializable {
 
 
