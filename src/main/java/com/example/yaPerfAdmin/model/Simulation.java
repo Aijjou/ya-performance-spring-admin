@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="Simulation", catalog = "yaperf")
+@Table(name="Simulation", catalog = "bdd")
 public class Simulation implements java.io.Serializable {
 
 
