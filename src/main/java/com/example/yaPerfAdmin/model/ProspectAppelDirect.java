@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "prospect_appel_direct", catalog = "yaperf")
+@Table(name = "prospect_appel_direct", catalog = "bdd")
 public class ProspectAppelDirect {
 
 	private Integer id;
